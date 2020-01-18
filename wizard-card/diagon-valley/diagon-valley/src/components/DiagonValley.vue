@@ -79,3 +79,7 @@ a {
   color: #42b983;
 }
 </style>
+
+
+//todo: meter total por elemento
+//todo: hacerlo como array iterable 
