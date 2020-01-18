@@ -6,20 +6,22 @@
       <option value="5a05dc8cd45bd0a11bd5e071">Slytherin</option>
       <option value="5a05dc58d45bd0a11bd5e070">Hufflepuff</option>
     </select>
-    <p class="">{{ `House name: ${houseData.name}`}}</p>
-    <p class="">{{ `Mascot: ${houseData.mascot}`}}</p>
-    <p class="">{{ `Head: ${houseData.headOfHouse}`}}</p>
+    <HistoryCard :house-data="houseData"/>
   </div>
 </template>
 
 <script>
+import HistoryCard from './HistoryCard.vue';
 export default {
   name: 'HistoryHouse',
+  components: {
+    HistoryCard
+  },
   data() {
     return {
       API_KEY: '$2a$10$5ZwgiFKp4pkJ6VG5M2CYv.MOtJEBRYYk8M2xUNFNW9bD2rkMQhkDS',
       house_id: '5a05e2b252f721a3cf2ea33f',
-      houseData: '',
+      houseData: {},
     }
   },
   watch: {
