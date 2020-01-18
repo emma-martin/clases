@@ -3,35 +3,19 @@
     <h1>{{ 'Shopping time' }}</h1>
     <section>
     <h2>Shopping Cart Items:</h2>
-  <div>
-    <h3>{{items.wandsTitle}}</h3>
-    <label for="PriceWand">Price wands</label>
-    <input v-model="items.wandPrice" placeholder="price per wand" type="number" id="PriceWand" name="PriceWand">
-     <label for="QtyWands">Quantity wands</label>
-    <input v-model="items.wandsQty" placeholder="quantity" type="number" id="QtyWands" name="QtyWands">
-  </div>
-
-  <div>
-    <h3>{{items.booksTitle}}</h3>
-    <label for="PriceBook">Price book</label>
-    <input v-model="items.bookPrice" placeholder="price per book" type="number" id="PriceBook" name="PriceBook">
-    <label for="QtyBook">Quantity book</label>
-    <input v-model="items.booksQty" placeholder="quantity" type="number" id="QtyBook" name="QtyBook">
-  </div>
-
-  <div>
-    <h3>{{items.hatsTitle}}</h3>
-    <label for="PriceHat">Price hat</label>
-    <input v-model="items.hatPrice" placeholder="price per hat" type="number" id="PriceHat" name="PriceHat">
-    <label for="QtyHat">Quantity hat</label>
-    <input v-model="items.hatsQty" placeholder="quantity" type="number" id="QtyHat" name="QtyHat ">
-  </div>
-
+      <ul>
+        <li :v-for="(card, index) in cards" :key="index">
+          <h3>{{card.title}}</h3>
+          <label for="price">Price:</label>
+          <input v-model="card.price" placeholder="price per wand" type="number" id="price" name="price">
+          <label for="qty">Quantity:</label>
+          <input v-model="card.qty" placeholder="quantity" type="number" id="qty" name="qty">
+        </li>
+      </ul>
   <div>
     <h4>Total:</h4>
     <p>{{`${totalCart} $$$`}}</p>
   </div>
-
     </section>
   </div>
 </template>
@@ -41,22 +25,30 @@ export default {
   name: 'DiagonValley',
 data() {
   return {
-    items: {
-      wandsTitle: 'Wands',
-      booksTitle: 'Books',
-      hatsTitle: 'Hats',
-      wandPrice: 0,
-      bookPrice: 0,
-      hatPrice: 0,
-      wandsQty: 0,
-      booksQty: 0,
-      hatsQty: 0,
-    }
+    cards: 
+      [
+        {
+        title: 'book',
+        price: 31,
+        qty: 1,
+      },
+      {
+        title: 'wand',
+        price: 240,
+        qty: 1,
+      },
+      {
+        title: 'hat',
+        price: 280,
+        qty: 1,
+      },
+
+    ],
   }
 },
 computed: {
   totalCart(){
-    return this.items.wandPrice*this.items.wandsQty + this.items.bookPrice*this.items.booksQty +  this.items.hatPrice*this.items.hatsQty;
+    return this.cards.price*this.cards.qty;
   }
 },
 }
