@@ -25,13 +25,9 @@ export default {
     }
   },
   watch: {
-  //  async house_id(){
-     // const houseFetched = await this.fetchHouse();
-   //   return houseFetched;
- //   }
-  house_id: {
-   immediate: true,
-    handler: 'fetchHouse',
+    house_id: {
+      immediate: true,
+      handler: 'fetchHouse',
     } 
  },
   methods: {
@@ -43,8 +39,6 @@ export default {
   },
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 h3 {
   margin: 40px 0 0;
