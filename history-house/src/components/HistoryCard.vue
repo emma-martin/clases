@@ -15,9 +15,9 @@
             houseData: {
             type: Object,
             default: ()=>({}),
-            validator(){
-                return ;
-            },
+            // validator(){
+            //     return ;
+            // },
         }
         }
     }
