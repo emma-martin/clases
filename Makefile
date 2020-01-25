@@ -9,3 +9,6 @@ wizard:
 
 sorting:
 	cd sorting-hat && npm run serve
+
+capture:
+	cd capture-wizard && npm run serve

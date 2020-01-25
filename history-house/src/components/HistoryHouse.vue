@@ -1,11 +1,10 @@
 <template>
   <div class="hello">
-    <div v-if="isLoading">
-      <p class="loader">
+    <div v-show="isLoading">
+      <div class="loader">
         Loading...
-      </p>
+      </div>
     </div>
-    <div v-else>
     <select v-model="house_id" >
       <option value="5a05e2b252f721a3cf2ea33f" selected>Gryffindor</option>
       <option value="5a05da69d45bd0a11bd5e06f">Ravenclaw</option>
@@ -13,7 +12,6 @@
       <option value="5a05dc58d45bd0a11bd5e070">Hufflepuff</option>
     </select>
     <HistoryCard :house-data="houseData"/>
-    </div>
   </div>
 </template>
 
@@ -35,9 +33,9 @@ export default {
       isLoading: true,
     }
   },
-  created(){
+  async created(){
     this.isLoading = true;
-    this.fetchHouse(this.house_id);
+    await this.fetchHouse(this.house_id);
     this.isLoading = false;
 
   },
@@ -149,4 +147,5 @@ computed: escucha varios valores, retorna un valor
 watch: escucha solo un valor, puede hacer logica y modificar varios valores
 computed: da valor inicial siempre
 watch: necesita propiedad
+pending:arreglar loader
 

@@ -4,10 +4,24 @@
     <section>
     <h2>Shopping Cart Items:</h2>
       <ul v-for="(card, index) in cards" :key="index">
-        <diagon-item
-        :card="card"
-        :index="index"
-        />
+        <li>
+          <div v-if="card.qty === 0">
+            <p>No items to show</p>
+          </div>
+          <div class="card" v-else>
+            <h3>{{card.title}}</h3>
+            <label for="price">Price:</label>
+            <input v-model="card.price" placeholder="price per wand" type="number" id="price" name="price">
+            <label for="qty">Quantity:</label>
+            <input v-model="card.qty"
+             placeholder="quantity" 
+             type="number" id="qty" 
+             name="qty"
+             @change="onChangeQty"
+             @click="deleteItem(index)">
+             <p>{{`total ${card.title}s'price: ${priceCategory(card)}`}}</p>
+          </div>
+        </li>
       </ul>
   <div>
     <h4>Total:</h4>
