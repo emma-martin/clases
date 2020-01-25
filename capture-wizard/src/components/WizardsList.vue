@@ -1,10 +1,10 @@
 <template>
   <div class="hello">
     <header>
-      <h1>Cath 'em all</h1>
-      <input type="text" @keydown="searchByName"> 
+      <h1>Cath'em all</h1>
+      <input type="text" v-model="userquery"  @input="searchByName()"> 
     </header>
-    <ul v-for="card in cards" :key="card.id">
+    <ul v-for="card in filteredCards" :key="card.id">
       <wizard-card
         :card="card"
         @delete-wizard="console.log(wizardId)"
@@ -21,6 +21,13 @@ export default {
   name: 'WizardsList',
   components: {
     WizardCard,
+  },
+  computed: {
+    filteredCards() { 
+    // let para el filtrado 
+    let filteredItems = this.searchByName(this.cards, this.userquery);
+     return filteredItems;
+    }
   },
     data() {
       return {
@@ -46,12 +53,20 @@ export default {
             price: 12,
             pic: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRm6CxnUca-8CplHPmkm5A0oPNBENJUCVP1cxUhTkRiKp7bvX5H&s',
           },
-        ]
+        ],
+        userquery: '',
       }
     },
   methods: {
-    searchByName(){
-      
+    searchByName(cards, query){
+      let results = [];
+      if(query && query.length < 0){
+        results = cards.filter(card => card.name.toLowerCase().includes(query.toLowerCase()));
+      }
+      else {
+        results = cards;
+      }
+      return results;
     }
   },
 }
@@ -76,3 +91,6 @@ a {
 </style>
 
 //agregar header, dentro un titulo, input para filtrar por mago
+// usar hooks, slots, computed and such
+meter loader
+si hay resultados, se muetra lista, otherwise, texto
