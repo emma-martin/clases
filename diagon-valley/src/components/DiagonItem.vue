@@ -1,85 +1,64 @@
 <template>
-        <li>
-          <div v-if="card.qty === 0">
-            <p>No items to show</p>
-          </div>
-
-          <div class="card" v-else>
-            <h3>{{card.title}}</h3>
-            <label for="price">Price:</label>
-            <input 
-            v-model="card.price"
-            placeholder="price per item" 
-            type="number" 
-            id="price" 
-            name="price">
-            <label for="qty">Quantity:</label>
-            <input 
-            v-model="card.qty"
-             placeholder="quantity" 
-             type="number" 
-             id="qty" 
-             name="qty"
-            >
-             <p>{{`total ${card.title}s'price: ${priceCategory(card)}`}}</p>
-
-             <button
-             @click="onEmitData(index)"
-             >
-                 Anadir item
-             </button>
-             <button
-             @click="deleteItem(index)"
-             >
-                 Eliminar item
-             </button>
-          </div>
-        </li>
+  <div class="card">
+      <form >
+        <h3>{{card.title}}</h3>
+        <label for="price">Price:</label>
+        <input v-model="card.price" placeholder="price per item" name="price" />
+        <label for="qty">Quantity:</label>
+        <input v-model="card.qty" placeholder="quantity" name="qty" />
+        <p>{{`total ${card.title}s' price: ${priceCategory(card)}`}}</p>
+      </form>
+      <div>
+        <button @click="incrementItem(card)">{{`Add ${card.title}s`}}</button>
+        <button @click="decrementItem(card)">{{`Remove ${card.title}s`}}</button>
+      </div>
+      <button @click="deleteItem(card)">{{`Delete ${card.title}s`}}</button>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'DiagonItem',
+  name: "DiagonItem",
   props: {
-      card: {
-        type: Object,
-        default: ()=>{},
-      },
-    index: {
-        type: String,
-        default: "",
-      }
+    card: {
+      type: Object,
+      default: () => {}
+    },
   },
-    methods:{
-        priceCategory(item) {
-            return item.qty * item.price;
-        },
-        onEmitData(){
-            this.$emit('card-data', {product: this.card, ind: this.index});
-            },
-        deleteItem(){
-            this.$emit('card-index', this.index);
-        },
+  methods: {
+    priceCategory(item) {
+      return item.qty * item.price;
+    },
+    decrementItem() {
+      this.$emit("decrement",this.card);
+    },
+    incrementItem() {
+      this.$emit("increment", this.card);
+    },
+    deleteItem() {
+      this.$emit("delete", this.card);
     }
-}
+  }
+};
 </script>
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
+
+.card{
+  background: #fff;
+  border-radius: 2px;
   display: inline-block;
-  margin: 0 10px;
+  height: 300px;
+  margin: 1rem;
+  width: 300px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  &:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
 }
-a {
-  color: #42b983;
+label{
+  display: block;
 }
+
+
+
 </style>
-
-
-//todo: meter total por elemento
-//todo: hacerlo como array iterable 

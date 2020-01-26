@@ -1,34 +1,31 @@
 <template>
   <div>
-    <h1>Casa</h1>
+    <h1>Sorting Hat</h1>
+      <img id="crazy-hat" class="m" src="https://media.thetab.com/blogs.dir/13/files/2012/11/sorting-hat.png"/>
     <app-button 
-      :houses="houses"
-      @onHouse="assignRandom"
+      :houses="houses" 
     />
-    <p>{{house}}</p>
   </div>
 </template>
 
 <script>
-import AppButton from './AppButton.vue'
+import AppButton from "./AppButton.vue";
 
 export default {
- name: 'HistoryHat',
- components: {
-   AppButton,
- },
+  name: "HistoryHat",
+  components: {
+    AppButton
+  },
   data() {
     return {
-      houses: [
-        'Gryffindor', 'Ravenclaw', 'Slytherin', 'Hufflepuff',
-      ],
-      house: '',
-    }
+      houses: ["Gryffindor", "Ravenclaw", "Slytherin", "Hufflepuff"],
+    };
   },
-  methods: {
-    assignRandom(data){
-      this.house = data;
-    }
-  },
-}
+};
 </script>
+
+<style lang="css" scoped>
+.m{
+  margin: 80px 0px 80px 80px;
+}
+</style>

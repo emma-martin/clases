@@ -2,19 +2,26 @@
   <div class="hello">
     <h1>{{ 'Shopping time' }}</h1>
     <section>
-    <h2>Shopping Cart Items:</h2>
-      <ul v-for="(card, index) in cards" :key="index">
+      <h2>Shopping Cart Items:</h2>
+      <div v-if="cards.length === 0">
+        <p>No items to show</p>
+      </div>
+      <ul v-else>
+       <li v-for="(card, index) in cards" :key="index">  
         <diagon-item
-        :card="card"
-        :index="index"
+          :card="card"
+          @increment="onIncrement"
+          @decrement="onDecrement"
+          @delete="deleteItem(card, index)"
         />
+        </li>
       </ul>
-  <div>
-    <h4>Total:</h4>
-    <p>{{`${totalCart} $$$`}}</p>
-  </div>
+      <div>
+        <h4>Total:</h4>
+        <p>{{`${totalCart} $$$`}}</p>
+      </div>
     </section>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -29,19 +36,23 @@ data() {
   return {
     cards:[
       {
-        title: 'book',
+        title: 'Book',
         price: 31,
         qty: 1,
+        id: 324,
       },
       {
-        title: 'wand',
+        title: 'Wand',
         price: 240,
         qty: 1,
+        id: 229,
+
       },
       {
-        title: 'hat',
+        title: 'Hat',
         price: 280,
         qty: 1,
+        id: 268,
       },
     ],
   }
@@ -55,39 +66,26 @@ computed: {
   },
 },
 methods:{
-    deleteItem(index) {
-      if(this.cards[index].qty <= 0) { 
+    deleteItem(card, index) {
+      if(this.cards[index] === card) { 
         this.cards.splice(index, 1)
       }
     },
-    priceCategory(item) {
-        return item.qty * item.price;
+    onIncrement(card){
+      return card.qty++;
     },
-    onChangeQty(qty){
-      return qty;
-    }
+      onDecrement(card){
+      return card.qty--;
+    },
   }
 }
 </script>
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
+ul{
+  list-style: none;
+  display: flex;
+  justify-content: center;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
 
-
-//todo: crear componente DiagonItem, se le envia el prop de la card,
-el item emite los eventos de increment y decrement qty, 
-mete un boton en cada fila que permite borrar un elemento del carrito
-emitiendo el index a eliminar
