@@ -12,3 +12,7 @@ sorting:
 
 capture:
 	cd capture-wizard && npm run serve
+
+characters:
+
+	cd wizard-characters && npm run serve
